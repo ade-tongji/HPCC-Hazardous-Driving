@@ -1,6 +1,6 @@
 # HPCC-Hazardous-Driving
 ## Citation
- ``
+ |
 @inproceedings{gao2021lightweight,
   title={A Lightweight VK-Net Based on Motion Profiles for Hazardous Driving Scenario Identification},
   author={Gao, Zhen and Xu, Jingning and Zheng, Jiang Yu and Fan, Hongfei and Yu, Rongjie and Zong, Jiaqi and Li, Xinyi},
@@ -9,4 +9,4 @@
   year={2021},
   organization={IEEE}
 }
-``
+|
