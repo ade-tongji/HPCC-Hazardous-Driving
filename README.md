@@ -10,7 +10,7 @@
  - `BuildAlexNetSimple`：轻量级CNN模型
  - `BuildCBAMAlexNet`：轻量级CNN + CBAM注意力机制
  - `BuildCBAMAlexNetAll`：轻量级CNN + CBAM注意力机制 + 运动学参数（LSTM）
-## Citation
+## 论文
  
     @inproceedings{guo2020towards,
         title =        {A Lightweight VK-Net Based on Motion Profiles for Hazardous Driving Scenario Identification},
