@@ -1,4 +1,15 @@
 # HPCC-Hazardous-Driving
+## 数据说明
+数据存放于43.41服务器中`/data/VOLVO/HPCC_modelling_data`目录下，三个目录说明：
+ - `data`：运动学参数，以npy格式存储，读取时使用`numpy`库的np.load方法
+ - `label`：标签0/1（正常/危险驾驶场景），csv文件
+ - `img`：motion profile的img图像，每一个视频对应一张图片
+## 模型说明
+`model.py`文件中各个模型类说明：
+ - `BuildAlexNet`：原AlexNet模型
+ - `BuildAlexNetSimple`：轻量级CNN模型
+ - `BuildCBAMAlexNet`：轻量级CNN + CBAM注意力机制
+ - `BuildCBAMAlexNetAll`：轻量级CNN + CBAM注意力机制 + 运动学参数（LSTM）
 ## Citation
  
     @inproceedings{guo2020towards,
