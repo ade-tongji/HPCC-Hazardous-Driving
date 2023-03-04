@@ -9,7 +9,9 @@
  - `BuildAlexNet`：原AlexNet模型
  - `BuildAlexNetSimple`：轻量级CNN模型
  - `BuildCBAMAlexNet`：轻量级CNN + CBAM注意力机制
- - `BuildCBAMAlexNetAll`：轻量级CNN + CBAM注意力机制 + 运动学参数（LSTM）
+ - `BuildCNNwithCBAMAndLSTM`：轻量级CNN + CBAM注意力机制 + 运动学参数（LSTM）
+ - `BuildCNNwithCBAMAndFC`：轻量级CNN + CBAM注意力机制 + 运动学参数（FC）
+ 
 ## 论文
  
     @inproceedings{guo2020towards,
