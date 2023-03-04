@@ -397,8 +397,61 @@ class BuildCBAMAlexNet(nn.Module):
 
         return out
 
-# 轻量级CNN + CBAM + 运动学数据
-class BuildCBAMAlexNetAll(nn.Module):
+    
+class BuildCNNwithCBAMAndLSTM(nn.Module):
+    def __init__(self, model_type, n_input, n_output, dim_kinematic=0):
+        super(BuildCBAMandSpeedCNN, self).__init__()
+        self.CNN = BuildCBAMAlexNet(model_type, n_input, n_output, dim_kinematic)
+
+        self.classifier = nn.Sequential(
+            nn.Linear(3, n_output))
+        
+        in_feature = 3
+        hidden_feature = 16
+        num_layers = 3
+        num_class = 2
+        self.lstm = lstm(in_feature, hidden_feature, num_class, num_layers)
+
+        self.classifier.apply(self.weights_init)
+        # self.spd_lr.apply(self.weights_init2)
+    
+    def weights_init(self, m):
+        classname = m.__class__.__name__
+        if classname.find('Conv') != -1:
+            m.weight.data.normal_(0.0, 0.02)
+            # m.weight.data是卷积核参数, m.bias.data是偏置项参数
+        elif classname.find('BatchNorm') != -1:
+            m.weight.data.normal_(1.0, 0.02)
+            m.bias.data.fill_(0)
+        elif isinstance(m, nn.Linear):
+            # m.weight.data.normal_(0.0, 0.02)
+            m.weight.data = torch.FloatTensor([[1.0, 0.5, -0.5]])
+            m.bias.data.zero_()
+            print(m.weight.data, m.bias.data)
+            
+    def weights_init2(self, m):
+        classname = m.__class__.__name__
+        if classname.find('Conv') != -1:
+            m.weight.data.normal_(0.0, 0.02)
+            # m.weight.data是卷积核参数, m.bias.data是偏置项参数
+        elif classname.find('BatchNorm') != -1:
+            m.weight.data.normal_(1.0, 0.02)
+            m.bias.data.fill_(0)
+        elif isinstance(m, nn.Linear):
+            m.weight.data.normal_(0.0, 0.02)
+            m.bias.data.zero_()
+            print(m.weight.data, m.bias.data)
+
+    def forward(self, x, data=None, event=None):
+        x = self.CNN(x)
+        data = torch.relu(self.lstm(data))
+        x = torch.cat([x, data], dim=1)
+        out = self.classifier(x)
+        return out
+
+    
+# 轻量级CNN + CBAM + 运动学数据(全连接)
+class BuildCNNwithCBAMAndFC(nn.Module):
     def __init__(self, model_type, n_input, n_output, dim_kinematic=0):
         super(BuildCBAMAlexNetAll, self).__init__()
         self.model_type = model_type
