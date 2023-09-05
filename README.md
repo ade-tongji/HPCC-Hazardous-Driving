@@ -4,6 +4,7 @@
  - `data`：运动学参数，以npy格式存储，读取时使用`numpy`库的np.load方法
  - `label`：标签0/1（正常/危险驾驶场景），csv文件
  - `img`：motion profile的img图像，每一个视频对应一张图片
+ - 可使用`generate_mp.py`生成motion profile图像
 ## 模型说明
 `model.py`文件中各个模型类说明：
  - `BuildAlexNet`：原AlexNet模型
